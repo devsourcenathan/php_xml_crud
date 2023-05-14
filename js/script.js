@@ -1,7 +1,9 @@
 
 
     document.querySelector("#add_etudiant").onclick=function () {
-    document.querySelector("#form_app").classList.toggle("hide");    
+        document.querySelector("#form_app").classList.toggle("hide");    
+
+        
     }
     
     document.getElementById("annuler").addEventListener('click', () => {
@@ -9,11 +11,44 @@
     })
 
     function sendMessage(status, content){
-        let str = status.toUpperCase() + "\n";
-        str += '================ \n\n';
-        str += content + '\n';
 
-        alert(str)
+        let messageBox = document.getElementById('message')
+
+        
+        if(status === 'success'){
+            messageBox.style.backgroundColor = "green"
+        }else if(status === 'update'){
+            messageBox.style.backgroundColor = "orange"
+        }else{
+            messageBox.style.backgroundColor = "red"
+        }
+        
+        messageBox.classList.remove('hide')
+        document.querySelector("#message .title span").innerHTML = status.toUpperCase()
+        document.querySelector("#message .content").innerHTML = content[0].toUpperCase() + content.slice(1)
+
+
+
+        setTimeout(()=> {
+            messageBox.classList.add('hide')
+        }, 2500)
+       
+    }
+
+    function loaderOn(){
+        document.querySelector("#app_load").classList.remove('hide')
+    }
+
+    function loaderOff(){
+        document.querySelector("#app_load").classList.add('hide')
+    }
+
+    function clearForm(){
+
+        document.querySelector("#idetudiant").value = ""
+        document.querySelector("#matricule").value = ""
+        document.querySelector("#nom").value = ""
+        document.querySelector("#telephone").value = ""
     }
 
     function etudiantToHtml(xmlChild, i){
@@ -131,52 +166,65 @@
 
     
 
-    document.querySelector('#form_add').onsubmit=function(){
+    document.querySelector('#form_add').onsubmit=function(e){
+
+        e.preventDefault()
         let form =new FormData(this);
         let xhttp = new XMLHttpRequest();
         
-
-        if(form.get('idetudiant') == null || form.get('idetudiant') == ""){
-            xhttp.open('POST','api/create.php',true);
-            xhttp.send(form);
-            xhttp.onload=function(){
-                let res= xhttp.responseXML;
-                let xmlRoot= res.documentElement;
-                let status =xmlRoot.querySelector('status').textContent;
-                let content =xmlRoot.querySelector('content').textContent;
-                readAll();
-
-                document.querySelector("#form_app").classList.toggle("hide")
-
-                sendMessage(status, content)
+        
+        loaderOn();
+            if(form.get('idetudiant') == null || form.get('idetudiant') == ""){
+                xhttp.open('POST','api/create.php',true);
+                xhttp.send(form);
+                xhttp.onload=function(){
+                    let res= xhttp.responseXML;
+                    let xmlRoot= res.documentElement;
+                    let status =xmlRoot.querySelector('status').textContent;
+                    let content =xmlRoot.querySelector('content').textContent;
+                    readAll();
+                    
+                    // document.querySelector("#form_app").classList.toggle("hide")
+                    
+                    sendMessage(status, content)
+                    clearForm()
+                }
+            }else{
+                xhttp.open('POST','api/update.php',true);
+                xhttp.send(form);
+    
+                console.log(form);
+                xhttp.onload=function(){
+                    let res= xhttp.responseXML;
+                    let xmlRoot= res.documentElement;
+                    let status =xmlRoot.querySelector('status').textContent;
+                    let content =xmlRoot.querySelector('content').textContent;
+    
+                    document.querySelector("#matricule").removeAttribute('disabled')
+                    // document.querySelector("#form_app").classList.toggle("hide");
+                    readAll();
+                    
+                    sendMessage(status, content)
+                    clearForm()
+                    
+                }
             }
-        }else{
-            xhttp.open('POST','api/update.php',true);
-            xhttp.send(form);
+            loaderOff()
 
-            console.log(form);
-            xhttp.onload=function(){
-                let res= xhttp.responseXML;
-                let xmlRoot= res.documentElement;
-                let status =xmlRoot.querySelector('status').textContent;
-                let content =xmlRoot.querySelector('content').textContent;
 
-                document.querySelector("#matricule").removeAttribute('disabled')
-                document.querySelector("#form_app").classList.toggle("hide");
-                
-                readAll();
-
-                sendMessage(status, content)
-                
-            }
-        }
+        
         return false;
         
     }
 
-    setInterval(()=>{
-        readAll();
-        console.log('ok');
-    }, 5000)
+    // setInterval(()=>{
+    //     readAll();
+    //     loaderOn()
+    // }, 5000)
 
-    readAll();
+
+    setTimeout(()=>{
+        loaderOff()
+        readAll();
+    }, 2500)
+
