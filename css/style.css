@@ -1,0 +1,157 @@
+:root{
+    --app-color1:rgba(20,70,158,1);
+    --app-color2:rgb(94, 158, 20);
+    --app-family1:"comic sans ms",verdana,sans-serif;
+    --app-family2:forte,verdana,sans-serif;
+
+}
+body{
+    padding: 0;
+    margin: 0;
+    font-size: 12pt;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.hide{  
+    display: none;
+}
+.show{
+    display: block;
+}
+
+
+header{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    color: white;
+    background-color: var(--app-color1);
+    text-align: right;
+    padding: 15px 0px;
+}
+
+header #logo{
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-family: var(--app-family2);
+    font-size: 20pt;
+}
+
+header nav button{
+    position: relative;
+    right: 10px;
+    font-size: 10pt;
+    font-weight: bold;
+    background-color: white;
+    padding: 5px;
+    border: none;
+}
+
+header nav button:hover{
+    transform: scale(1.05);
+    background-color: var(--app-color1);
+    color: white;
+    transition: all 0.5s ease-in-out;
+}
+
+#form_app{
+    color: white;
+    background-color: var(--app-color2);
+    padding: 30px 0px;
+    border-radius: 0px 0px 50px 50px;
+
+}
+
+#form_app form{
+    position: relative;
+    width: 60%;
+    min-width: 200px;
+    margin: 0px auto;
+}
+
+#form_app form fieldset{
+    border: none;
+    border-top: 2px solid var(--app-color1);
+}
+
+#form_app form fieldset legend{
+    font-size: 15pt;
+    font-family: forte,verdana,sans-serif;
+}
+
+#form_app form .field label{
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+#form_app form .field input{
+    width: 100%;
+    height: 25px;
+    padding: 5px;
+    border:none;
+    border-bottom: 2px solid var(--app-color1);
+}
+
+#form_app form .button{
+    text-align: right;
+}
+
+#form_app form .button input{
+    font-size: 10pt;
+    font-weight: bold;
+    padding: 7px 10px;
+    color: white;
+    background-color: var(--app-color1);
+    border:none;
+    cursor: pointer;
+}
+
+#form_app form .button #annuler{
+    background-color: darkred;
+}
+
+#table_app{
+    padding: 30px 0px;
+
+}
+
+#table_app h2{
+    font-family: var(--app-family2);
+    text-align: center;
+}
+
+
+#table_app table{
+    position: relative;
+    width: 80%;
+    min-width: 200px;
+    margin: 5px auto;
+}
+
+
+#table_app table th{
+    color: white;
+    background-color: var(--app-color1);
+    
+}
+
+#table_app table td{
+    text-align: center;    
+}
+#table_app table .options button{
+    padding: 7px 10px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    color: white; 
+}
+#table_app table .options .update{
+    background-color: darkgreen;
+}
+
+#table_app table .options .delete{
+    background-color: darkred;
+}

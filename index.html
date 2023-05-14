@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Gestion des Etudiant</title>
+</head>
+<body>
+    <header>
+        <div id="logo">
+            EtudiantApp
+        </div>
+
+        <nav>
+            <button type="button" id="add_etudiant" >
+                Ajouter un Etudiant
+            </button>
+        </nav>
+    </header>
+
+    <section id="form_app" class="hide">
+        <form action="" name="form" method="POST" id="form_add" >
+            <fieldset>
+                <legend>
+                    Ajouter un Etudiant
+                </legend>
+
+                <p class="field">
+                    <input type="hidden" name="idetudiant" id="idetudiant" readonly/>
+                </p>
+
+                <p class="field">
+                    <label for="matricule">
+                        Entrez le matricule
+                    </label>
+                    </br>
+                    <input type="text"  name="matricule" id="matricule" required/>
+                </p>
+                <p class="field">
+                    <label for="nom">
+                        Entrez le nom
+                    </label>
+                    </br>
+                    <input type="text" name="nom" id="nom" required/>
+                </p>
+                <p class="field">
+                    <label for="telephone">
+                        Entrez le numero de telephone
+                    </label>
+                    </br>
+                    <input type="tel" name="telephone" id="telephone" />
+                </p>
+
+                <p class="button">
+                    <input type="submit" name="enregistrer" id="enregistrer" value="enregistrer"/>
+                    <input type="reset" name="annuler" id="annuler" value="annuler"/>
+                </p>
+            </fieldset>
+        </form>
+    </section>
+
+    <section id="table_app">
+        <h2>LISTE DES ETUDIANTS</h2>
+        <table border="1" cellspacing="0" cellpadding="4">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Matricule</th>
+                    <th>Nom</th>
+                    <th>Telephone</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody id="elements">
+            </tbody>
+        </table>
+    </section>
+    
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
